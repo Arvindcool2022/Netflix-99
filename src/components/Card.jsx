@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Carousel = ({ name, img }) => {
+const Card = ({ name, img, className = '' }) => {
   const URL = img
     ? `https://image.tmdb.org/t/p/original${img}`
     : 'https://img.freepik.com/premium-vector/no-symbol-circle-prohibition-red-stop-sign-no-entry-symbol_532867-433.jpg?w=740';
   return (
-    <div className="h-52  relative me-3">
+    <div className={`h-52 relative me-3 ${className}`}>
       <p className="absolute text-white bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-center  font-medium">
         {name}
       </p>
@@ -14,4 +14,4 @@ const Carousel = ({ name, img }) => {
   );
 };
 
-export default Carousel;
+export default Card;

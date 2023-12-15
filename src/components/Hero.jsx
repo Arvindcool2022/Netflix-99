@@ -43,3 +43,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+// todo: fetch('https://api.themoviedb.org/3/movie/{movieID}?language=en-US', OPTIONS).then(response => response.json()).then(response => console.log(response)).catch(err => console.error(err))
