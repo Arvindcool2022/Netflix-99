@@ -6,3 +6,5 @@ movie detail
 
 
 {https://api.themoviedb.org/3/movie/{movie_id}/images}
+
+{https://image.tmdb.org/t/p/original/{imagePath}}
