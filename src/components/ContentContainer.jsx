@@ -86,25 +86,45 @@ const ContentContainer = () => {
       <h1 className="text-2xl mb-2 font-bold capitalize">popular movies</h1>
       <Slider {...settings}>
         {popularData.map(data => (
-          <Card name={data.title} img={data.backdrop_path} key={data.id} />
+          <Card
+            name={data.title}
+            img={data.backdrop_path}
+            key={data.id}
+            id={data.id}
+          />
         ))}
       </Slider>
       <h1 className="text-2xl mb-2 font-bold capitalize">top-rated movies</h1>
       <Slider {...settings}>
         {topData.map(data => (
-          <Card name={data.title} img={data.backdrop_path} key={data.id} />
+          <Card
+            name={data.title}
+            img={data.backdrop_path}
+            key={data.id}
+            id={data.id}
+          />
         ))}
       </Slider>
       <h1 className="text-2xl mb-2 font-bold capitalize">upcoming movies</h1>
       <Slider {...settings}>
         {UpcomingData.map(data => (
-          <Card name={data.title} img={data.backdrop_path} key={data.id} />
+          <Card
+            name={data.title}
+            img={data.backdrop_path}
+            key={data.id}
+            id={data.id}
+          />
         ))}
       </Slider>
       <h1 className="text-2xl mb-2 font-bold capitalize">global nominees</h1>
       <Slider {...settings}>
         {nowData.map(data => (
-          <Card name={data.title} img={data.backdrop_path} key={data.id} />
+          <Card
+            name={data.title}
+            img={data.backdrop_path}
+            key={data.id}
+            id={data.id}
+          />
         ))}
       </Slider>
     </div>

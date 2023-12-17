@@ -6,6 +6,7 @@ import IconSearch from './ReactSVG/IconSearch';
 import IconBell from './ReactSVG/IconBell';
 import IconUserAstronaut from './ReactSVG/IconUserAstronaut';
 import Card from './Card';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const scroll = useScrollPostion();
@@ -16,7 +17,8 @@ const Header = () => {
   const debounceTimer = useRef(null);
 
   useEffect(() => {
-    if (inputValue.trim())
+    if (inputValue.trim()) {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
       debounceTimer.current = setTimeout(() => {
         fetch(
           'https://api.themoviedb.org/3/search/movie?query=' + inputValue,
@@ -26,7 +28,7 @@ const Header = () => {
           .then(response => setSearchResult(response.results))
           .catch(err => console.error(err));
       }, 500);
-    else setSearchResult([]);
+    } else setSearchResult([]);
 
     return () => {
       clearTimeout(debounceTimer.current);
@@ -40,7 +42,9 @@ const Header = () => {
           `${scroll || searchResult.length ? 'bg-black' : ''}`
         }
       >
-        <p className="text-2xl font-bold text-red-600 uppercase">Netflix</p>
+        <Link to={'/'} className="text-2xl font-bold text-red-600 uppercase">
+          Netflix
+        </Link>
         <div className="flex justify-between w-full mx-4">
           <ul className="flex gap-4 justify-around capitalize items-center">
             <li>Home</li>
@@ -90,6 +94,7 @@ const Header = () => {
                   name={data.title}
                   img={data?.backdrop_path}
                   key={data.id}
+                  id={data.id}
                   className="w-80 overflow-hidden"
                 />
               );

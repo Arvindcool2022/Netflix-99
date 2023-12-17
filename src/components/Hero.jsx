@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { OPTIONS } from '../utils/contants';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [data, setData] = useState({});
@@ -30,9 +31,12 @@ const Hero = () => {
           <button className="me-4 px-12 py-2 rounded bg-white text-black">
             Play
           </button>
-          <button className="me-4 px-12 py-2 rounded bg-gray-600 bg-opacity-75">
+          <Link
+            to={'/details/' + data.id}
+            className="me-4 px-12 py-2 rounded bg-gray-600 bg-opacity-75"
+          >
             More Info
-          </button>
+          </Link>
         </div>
         <div className="absolute right-0 px-2 border-l-2 border-white bg-gray-600 bg-opacity-75">
           13+
