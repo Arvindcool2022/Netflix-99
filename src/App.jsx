@@ -1,5 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { Header, Body } from './components';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { Suspense, lazy } from 'react';
 const MovieDetails = lazy(() => import('./components/MovieDetails'));
 

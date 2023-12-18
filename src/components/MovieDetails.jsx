@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { OPTIONS } from '../utils/contants';
+import Skeleton from 'react-loading-skeleton';
 
 const MovieDetails = () => {
   const [movieData, setMovieData] = useState({});
@@ -24,19 +25,45 @@ const MovieDetails = () => {
     }
   }, [id]);
 
-  if (!movieData) return <div>loading</div>;
-
   return (
     <section className="pt-12 mx-auto max-w-6xl">
       <div className="flex justify-between pb-4">
         <div>
           <div className="pb-2">
-            <h1 className="text-4xl font-bold">{movieData.title} </h1>
-            <p className="font-medium text-stone-800">{movieData.tagline} </p>
+            <h1 className="text-4xl font-bold">
+              {movieData.title || (
+                <Skeleton
+                  enableAnimation={false}
+                  className="bg-stone-500 animate-pulse"
+                />
+              )}
+            </h1>
+            <p className="font-medium text-stone-800">
+              {movieData.tagline || (
+                <Skeleton
+                  enableAnimation={false}
+                  className="bg-stone-500 animate-pulse"
+                />
+              )}
+            </p>
           </div>
           <div className="flex gap-3">
-            <p>Duration: {calcTime(movieData.runtime)}</p>
-            <p>Release Date: {movieData.release_date}</p>
+            {movieData.runtime ? (
+              <p>Duration: {calcTime(movieData.runtime)}</p>
+            ) : (
+              <Skeleton
+                enableAnimation={false}
+                className="bg-stone-500 animate-pulse"
+              />
+            )}
+            {movieData.release_date ? (
+              <p>Release Date: {movieData.release_date}</p>
+            ) : (
+              <Skeleton
+                enableAnimation={false}
+                className="bg-stone-500 animate-pulse"
+              />
+            )}
           </div>
         </div>
         <ul className="flex gap-3 items-center ">
@@ -52,11 +79,15 @@ const MovieDetails = () => {
         </ul>
       </div>
       <div className="flex gap-1">
-        <img
-          src={`https://image.tmdb.org/t/p/original${movieData?.poster_path}`}
-          alt={`${movieData.original_title} poster`}
-          className="max-h-[430px]"
-        />
+        {movieData.poster_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/original${movieData?.poster_path}`}
+            alt={`${movieData.original_title} poster`}
+            className="max-h-[430px]"
+          />
+        ) : (
+          <div className="h-[430px] w-72 bg-black animate-pulse" />
+        )}
         <div className="relative w-2/3 overflow-hidden pb-[28.125%]">
           <iframe
             className="absolute w-full h-full left-0 top-0"
@@ -79,7 +110,14 @@ const MovieDetails = () => {
           )}
         </div>
       </div>
-      <p className="mt-4">{movieData.overview}</p>
+      <p className="mt-4">
+        {movieData.overview || (
+          <Skeleton
+            enableAnimation={false}
+            className="bg-stone-500 animate-pulse"
+          />
+        )}
+      </p>
       <div className="flex w-full justify-center mt-8">
         <Link
           className="border-2 px-3 py-1 rounded-full  border-blue-600 text-blue-600 font-semibold"
