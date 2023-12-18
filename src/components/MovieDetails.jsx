@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { OPTIONS } from '../utils/contants';
 import Skeleton from 'react-loading-skeleton';
+import { Image, Shimmer } from 'react-shimmer';
 
 const MovieDetails = () => {
   const [movieData, setMovieData] = useState({});
@@ -34,7 +35,7 @@ const MovieDetails = () => {
               {movieData.title || (
                 <Skeleton
                   enableAnimation={false}
-                  className="bg-stone-500 animate-pulse"
+                  className="bg-stone-500 animate-pulse w-96"
                 />
               )}
             </h1>
@@ -42,7 +43,7 @@ const MovieDetails = () => {
               {movieData.tagline || (
                 <Skeleton
                   enableAnimation={false}
-                  className="bg-stone-500 animate-pulse"
+                  className="bg-stone-500 animate-pulse w-96"
                 />
               )}
             </p>
@@ -79,15 +80,12 @@ const MovieDetails = () => {
         </ul>
       </div>
       <div className="flex gap-1">
-        {movieData.poster_path ? (
-          <img
+        <div className="max-h-[430px] w-72">
+          <Image
             src={`https://image.tmdb.org/t/p/original${movieData?.poster_path}`}
-            alt={`${movieData.original_title} poster`}
-            className="max-h-[430px]"
+            fallback={<Shimmer width={288} height={430} />}
           />
-        ) : (
-          <div className="h-[430px] w-72 bg-black animate-pulse" />
-        )}
+        </div>
         <div className="relative w-2/3 overflow-hidden pb-[28.125%]">
           <iframe
             className="absolute w-full h-full left-0 top-0"
@@ -115,6 +113,7 @@ const MovieDetails = () => {
           <Skeleton
             enableAnimation={false}
             className="bg-stone-500 animate-pulse"
+            count={3}
           />
         )}
       </p>
